@@ -98,4 +98,4 @@ stages:
               appSettings: >
                 -ASPNETCORE_ENVIRONMENT Production
                 -ConnectionStrings__ConnectionString "$(SQL_CONNECTION_STRING)"
-                -ConnectionStrings__DataProvider "SqlServer"
+                -ConnectionStrings__DataProvider SqlServer
