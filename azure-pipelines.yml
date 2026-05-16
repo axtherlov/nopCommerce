@@ -71,7 +71,6 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: '$(ACR_SERVICE_CONNECTION)'
         tags: |
-          $(tag)
           latest
 
 # ── Stage 3: Deploy to Azure App Service ─────────────────────────────────────
@@ -94,8 +93,4 @@ stages:
             inputs:
               azureSubscription: '$(AZURE_SERVICE_CONNECTION)'
               appName: '$(APP_SERVICE_NAME)'
-              containers: '$(containerRegistry)/$(imageRepository):$(tag)'
-              appSettings: >
-                -ASPNETCORE_ENVIRONMENT Production
-                -ConnectionStrings__ConnectionString "$(SQL_CONNECTION_STRING)"
-                -ConnectionStrings__DataProvider SqlServer
+              containers: '$(containerRegistry)/$(imageRepository):latest'
