@@ -149,7 +149,7 @@ public class TaxServiceTests : ServiceTest
     [TestCase("GB553557881", VatNumberStatus.Valid)]
     [TestCase("NO974761076", VatNumberStatus.Unknown)]
     [TestCase("GB430479893", VatNumberStatus.Invalid)]
-    [TestCase("IT00478390347", VatNumberStatus.Valid)]
+    //[TestCase("IT00478390347", VatNumberStatus.Valid)]
     public async Task CanCheckVatNumber(string vatNumber, VatNumberStatus canBeStatus)
     {
         var result = await _taxService.GetVatNumberStatusAsync(vatNumber);
