@@ -66,6 +66,10 @@ public partial class WebStoreContext : IStoreContext
         var allStores = await _storeService.GetAllStoresAsync();
         var store = allStores.FirstOrDefault(s => _storeService.ContainsHostValue(s, host)) ?? allStores.FirstOrDefault();
 
+        // Allow null during fresh install — install wizard will seed the first store
+        if (store == null && !DataSettingsManager.IsDatabaseInstalled())
+            return null;
+
         _cachedStore = store ?? throw new Exception("No store could be loaded");
 
         return _cachedStore;

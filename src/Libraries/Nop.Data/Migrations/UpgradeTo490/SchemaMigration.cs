@@ -25,7 +25,11 @@ public class SchemaMigration : ForwardOnlyMigration
             .NotNullable()
             .WithDefaultValue(0);
 
-        //#7294
+        //#7294 — drop index before altering columns (index is recreated by AddIndexesMigration)
+        var topicTableName = nameof(Topic);
+        if (Schema.Table(topicTableName).Index("IX_Topic_Availability").Exists())
+            Delete.Index("IX_Topic_Availability").OnTable(topicTableName);
+
         this.AddOrAlterColumnFor<Topic>(t => t.AvailableEndDateTimeUtc)
             .AsDateTime()
             .Nullable();
