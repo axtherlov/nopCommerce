@@ -94,3 +94,7 @@ stages:
               azureSubscription: '$(AZURE_SERVICE_CONNECTION)'
               appName: '$(APP_SERVICE_NAME)'
               containers: '$(containerRegistry)/$(imageRepository):latest'
+              appSettings: >
+                -DOCKER_REGISTRY_SERVER_URL $(DOCKER_REGISTRY_SERVER_URL)
+                -DOCKER_REGISTRY_SERVER_USERNAME $(DOCKER_REGISTRY_SERVER_USERNAME)
+                -DOCKER_REGISTRY_SERVER_PASSWORD $(DOCKER_REGISTRY_SERVER_PASSWORD)
